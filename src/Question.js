@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import History from './History';
+import './App.css';
 
-const Question = ({ question, change }) => {
+const Question = ({ question, change, user }) => {
 
-    const [questions, setQuestions] = useState([]);
+    const [answers, setAnswers] = useState([]);
 
     useEffect(() => {
 
@@ -12,17 +14,18 @@ const Question = ({ question, change }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        setQuestions([...questions, { 'question': question, 'answer': e.target.value }])
+        setAnswers([...answers, { 'question': question, 'answer': e.target.value }])
         let q = questArr.findIndex(q => q.question === question);
 
         change(questArr[q][e.target.value]);
     }
     return (
-        <div className='container mt-5'>
-            <div className='row'>
-
+        <div className='mt-5'>
+            <h3 className='display-6'>Questions for {user.name}</h3>
+            <p>Notes: {user.notes}</p>
+            <div className='row mt-5 Question'>
                 <div className='col-lg-7'>
-                    <h2 className='display-4'>{question}</h2>
+                    <h3 className='fs-1'>{question}</h3>
                 </div>
                 <div className='col-lg-5 d-grid gap-3 mt-3 mt-lg-0'>
 
@@ -33,8 +36,7 @@ const Question = ({ question, change }) => {
 
                 </div>
             </div>
-
-
+            <History answers={answers} />
         </div>
     )
 }
