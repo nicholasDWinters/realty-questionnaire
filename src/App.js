@@ -15,7 +15,8 @@ function App() {
     { 'type': 'noteTaking', 'question': 'Can I get your email to check in on occasion?', 'next': 'end of questionnaire' },
     { 'type': 'noteTaking', 'question': 'Can I meet you at the property / get more info - financials, condition, etc?', 'next': 'Set time to meet or follow up:' },
     { 'type': 'noteTaking', 'question': 'Set time to meet or follow up:', 'next': 'end of questionnaire' },
-    { 'type': 'noteTaking', 'question': 'Can you tell me more about which one(s)?', 'next': 'Can I meet you at the property / get more info - financials, condition, etc?' }
+    { 'type': 'noteTaking', 'question': 'Can you tell me more about which one(s)?', 'next': 'Can I meet you at the property / get more info - financials, condition, etc?' },
+    { 'question': 'end of questionnaire' }
   ];
   const [user, setUser] = useState({});
   const [current, setCurrent] = useState({ 'type': 'yesNo', 'question': 'Do you own this property?', 'yes': 'What is your plan for it?', 'no': 'Any others that you own in the area?' });

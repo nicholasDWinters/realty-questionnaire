@@ -10,10 +10,11 @@ const Question = ({ question, change, user, addClient, addUser, questArr }) => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        setAnswers([...answers, { 'question': question, 'answer': notes }])
-        let q = questArr.findIndex(q => q.question === question);
+        setAnswers([...answers, { 'question': question.question, 'answer': notes }])
 
-        change(questArr[q]['next?']);
+        let nextQ = questArr.filter(q => q.question === question.next);
+        change(nextQ[0]);
+        setNotes('');
     }
 
     const handleChange = e => {
@@ -30,17 +31,17 @@ const Question = ({ question, change, user, addClient, addUser, questArr }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        setAnswers([...answers, { 'question': question, 'answer': e.target.value }])
-        let q = questArr.findIndex(q => q.question === question);
-
-        change(questArr[q][e.target.value]);
+        setAnswers([...answers, { 'question': question.question, 'answer': e.target.value }])
+        let nextQ = questArr.filter(q => q.question === question[e.target.value]);
+        change(nextQ[0]);
     }
+
     return (
         <div className='mt-5'>
             <h3 className='display-6'>Questions for {user.name}</h3>
             <p>Notes: {user.notes}</p>
 
-            {question === 'end of questionnaire' ?
+            {question.question === 'end of questionnaire' ?
                 <div className='row mt-5 Question'>
                     <div className='col-lg-7'>
                         <h3 className='fs-1'>Thank you for your time.</h3>
@@ -53,7 +54,7 @@ const Question = ({ question, change, user, addClient, addUser, questArr }) => {
                 :
                 <div className='row mt-5 Question'>
                     <div className='col-lg-7'>
-                        <h3 className='fs-1'>{question}</h3>
+                        <h3 className='fs-1'>{question.question}</h3>
                     </div>
 
                     {/* add another ternary operator in here checking the question type, and displaying either yes/no choices, or a text area */}
