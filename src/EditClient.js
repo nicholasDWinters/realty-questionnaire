@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
-const UserForm = ({ add, clients }) => {
+const EditClient = ({ clients, addClient, editClient }) => {
+    const { phone } = useParams();
     const history = useHistory();
+    let client = clients.filter(client => client.user.phone === phone);
+    client = client[0];
     const initial = {
-        name: '',
-        email: '',
-        phone: '',
-        notes: ''
+        name: client.user.name,
+        email: client.user.email,
+        phone: client.user.phone,
+        notes: client.user.notes
     }
     const [data, setData] = useState(initial);
 
@@ -22,21 +25,22 @@ const UserForm = ({ add, clients }) => {
 
     const submit = e => {
         e.preventDefault();
-        add(data);
+        const newClient = {
+            'user': data,
+            'answers': client.answers,
+            'qNotes': client.qNotes
+        }
+        editClient(client.user.phone, newClient);
+        // addClient(newClient);
+
         setData(initial);
-        history.push('/questions');
+
+        history.push(`/clients/${newClient.user.phone}`);
+        // history.push(`/`);
     }
-
-    const viewClient = (client) => {
-        history.push(`/clients/${client}`)
-    }
-
-    useEffect(() => {
-
-    }, [clients])
     return (
-        <div className='mt-3'>
-            <h2 className='display-5'>Add New Client</h2>
+        <div>
+            <h1>Edit client</h1>
             <form className='mb-4' onSubmit={submit}>
                 <div className='row'>
                     <div className='col-lg-7'>
@@ -57,22 +61,22 @@ const UserForm = ({ add, clients }) => {
                             <label htmlFor="notes">Notes</label>
                         </div>
                         <div className='d-grid'>
-                            <button className='btn btn-primary btn-lg'>Start Questionnaire</button>
+                            <button className='btn btn-warning btn-lg'>Edit Client</button>
                         </div>
                     </div>
-                    <div className='col-lg-1'></div>
-                    <div className='col-lg-4'>
-                        <h3 className='display-6 mb-3 mt-4 mt-lg-0'>Current Clients</h3>
-                        {clients.map(client => <button className='btn btn-lg btn-light d-block mt-2' style={{ width: '100%' }} onClick={() => viewClient(client.user.phone)} key={client.user.name}>{client.user.name}</button>)}
-                    </div>
+
+
                 </div>
 
-
-                {/* <button type="submit" class="btn btn-primary">Submit</button> */}
             </form>
+            <div className='row'>
+                <div className='col-lg-7'>
+                    <button className='btn btn-secondary btn-lg' onClick={() => history.push(`/clients/${client.user.phone}`)}>Back to Clients</button>
 
+                </div>
+            </div>
         </div>
     )
 }
 
-export default UserForm;
+export default EditClient;

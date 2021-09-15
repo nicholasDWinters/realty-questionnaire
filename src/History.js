@@ -6,7 +6,7 @@ const History = ({ answers }) => {
             <h3>Summary of answers:</h3>
             {answers.map(answer =>
                 <div key={answer.question}>
-                    <p className='fs-5'>{answer.question} - <span className='text-muted'>{answer.answer}</span></p>
+                    <p className='fs-5'>{answer.question} - <span className='text-muted text-primary'>{answer.answer}</span></p>
                 </div>
             )}
         </div>

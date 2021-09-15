@@ -14,7 +14,7 @@ const NotesForm = ({ addClient, user, answers, addUser, change }) => {
             'qNotes': notes
         }
         addClient(client);
-        change('Do you own this property?');
+        change({ 'type': 'yesNo', 'question': 'Do you own this property?', 'yes': 'What is your plan for it?', 'no': 'Any others that you own in the area?' });
         addUser({});
     }
 

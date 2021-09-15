@@ -54,7 +54,7 @@ const Question = ({ question, change, user, addClient, addUser, questArr }) => {
                 :
                 <div className='row mt-5 Question'>
                     <div className='col-lg-7'>
-                        <h3 className='fs-1'>{question.question}</h3>
+                        <h3 className='fs-2'>{question.question}</h3>
                     </div>
 
                     {/* add another ternary operator in here checking the question type, and displaying either yes/no choices, or a text area */}
@@ -64,20 +64,19 @@ const Question = ({ question, change, user, addClient, addUser, questArr }) => {
                             <button className='btn btn-lg btn-danger' onClick={submit} value='no'>No</button>
                         </div>
                         :
-                        <form onSubmit={submitForm}>
+                        <div className='col-lg-5 mt-3 mt-lg-0'>
+                            <form onSubmit={submitForm}>
+                                <div className="form-floating mb-3">
+                                    <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" rows='5' value={notes} onChange={handleChange}></textarea>
+                                    <label htmlFor="notes">Notes</label>
+                                </div>
+                                <div className='d-grid'>
+                                    <button className='btn btn-primary btn-lg'>Next Question</button>
+                                </div>
 
 
-
-                            <div className="form-floating mb-3">
-                                <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" rows='5' value={notes} onChange={handleChange}></textarea>
-                                <label htmlFor="notes">Notes</label>
-                            </div>
-                            <div className='d-grid'>
-                                <button className='btn btn-primary btn-lg'>Next Question</button>
-                            </div>
-
-
-                        </form>
+                            </form>
+                        </div>
                     }
 
 
