@@ -14,7 +14,7 @@ const NotesForm = ({ addClient, user, answers, addUser, change }) => {
             'qNotes': notes
         }
         addClient(client);
-        change('do you like cake?');
+        change('Do you own this property?');
         addUser({});
     }
 

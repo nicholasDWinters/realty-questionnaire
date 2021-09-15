@@ -3,15 +3,30 @@ import NotesForm from './NotesForm';
 import History from './History';
 import './App.css';
 
-const Question = ({ question, change, user, addClient, addUser }) => {
+const Question = ({ question, change, user, addClient, addUser, questArr }) => {
 
     const [answers, setAnswers] = useState([]);
+    const [notes, setNotes] = useState('');
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        setAnswers([...answers, { 'question': question, 'answer': notes }])
+        let q = questArr.findIndex(q => q.question === question);
+
+        change(questArr[q]['next?']);
+    }
+
+    const handleChange = e => {
+        const { value } = e.target;
+
+        setNotes(value);
+    }
 
     useEffect(() => {
 
     }, [question]);
 
-    const questArr = [{ 'question': 'do you like cake?', 'yes': 'because you like cake, do you like ice cream?', 'no': 'do you enjoy pie instead?', 'maybe': 'why cant you decide? are you hungry?' }, { 'question': 'why cant you decide? are you hungry?', 'yes': 'end of questionnaire', 'no': 'end of questionnaire', 'maybe': 'end of questionnaire' }, { 'question': 'because you like cake, do you like ice cream?', 'yes': 'end of questionnaire', 'no': 'end of questionnaire', 'maybe': 'end of questionnaire' }, { 'question': 'do you enjoy pie instead?', 'yes': 'end of questionnaire', 'no': 'end of questionnaire', 'maybe': 'end of questionnaire' }];
+
 
     const submit = (e) => {
         e.preventDefault();
@@ -28,7 +43,7 @@ const Question = ({ question, change, user, addClient, addUser }) => {
             {question === 'end of questionnaire' ?
                 <div className='row mt-5 Question'>
                     <div className='col-lg-7'>
-                        <h3 className='fs-1'>End of Questionnaire!</h3>
+                        <h3 className='fs-1'>Thank you for your time.</h3>
                     </div>
                     <div className='col-lg-5 mt-3 mt-lg-0'>
                         <NotesForm addUser={addUser} addClient={addClient} answers={answers} user={user} change={change} />
@@ -40,14 +55,32 @@ const Question = ({ question, change, user, addClient, addUser }) => {
                     <div className='col-lg-7'>
                         <h3 className='fs-1'>{question}</h3>
                     </div>
-                    <div className='col-lg-5 d-grid gap-3 mt-3 mt-lg-0'>
+
+                    {/* add another ternary operator in here checking the question type, and displaying either yes/no choices, or a text area */}
+                    {question.type === 'yesNo' ?
+                        <div className='col-lg-5 d-grid gap-3 mt-3 mt-lg-0'>
+                            <button className='btn btn-lg btn-success' onClick={submit} value='yes'>Yes</button>
+                            <button className='btn btn-lg btn-danger' onClick={submit} value='no'>No</button>
+                        </div>
+                        :
+                        <form onSubmit={submitForm}>
 
 
-                        <button className='btn btn-lg btn-success' onClick={submit} value='yes'>Yes</button>
-                        <button className='btn btn-lg btn-danger' onClick={submit} value='no'>No</button>
-                        <button className='btn btn-lg btn-warning' onClick={submit} value='maybe'>Maybe</button>
 
-                    </div>
+                            <div className="form-floating mb-3">
+                                <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" rows='5' value={notes} onChange={handleChange}></textarea>
+                                <label htmlFor="notes">Notes</label>
+                            </div>
+                            <div className='d-grid'>
+                                <button className='btn btn-primary btn-lg'>Next Question</button>
+                            </div>
+
+
+                        </form>
+                    }
+
+
+
                 </div>
             }
 
