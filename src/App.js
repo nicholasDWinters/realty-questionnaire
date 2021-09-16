@@ -35,7 +35,6 @@ function App() {
   const addClient = (client) => {
     setClients([...clients, client]);
 
-
   }
 
   const editClient = (phone, client) => {
@@ -43,15 +42,11 @@ function App() {
     newClients = [...newClients, client];
 
     setClients([...newClients]);
-
-
-
   }
 
   const removeClient = (phone) => {
     let newClients = clients.filter(c => c.user.phone !== phone);
     setClients([...newClients]);
-
 
   }
 
@@ -59,7 +54,7 @@ function App() {
     let stored = localStorage.getItem('clients');
     localStorage.setItem('savedClients', stored);
     let savedClients = JSON.parse(stored);
-    setClients([...savedClients]);
+    setClients([...savedClients] || []);
   }, []);
 
   useEffect(() => {
@@ -67,8 +62,9 @@ function App() {
     localStorage.setItem('clients', JSON.stringify(clients));
   }, [clients]);
 
+
   useEffect(() => {
-  }, [user, clients]);
+  }, [user]);
 
 
 

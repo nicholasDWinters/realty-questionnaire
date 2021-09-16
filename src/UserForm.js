@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './App.css';
 
@@ -34,9 +34,6 @@ const UserForm = ({ add, clients }) => {
         history.push(`/clients/${client}`)
     }
 
-    useEffect(() => {
-
-    }, [clients]);
 
     return (
         <div className='mt-3 row'>
@@ -47,7 +44,7 @@ const UserForm = ({ add, clients }) => {
 
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" id="name" name='name' placeholder="John Smith" value={data.name} onChange={handleChange}></input>
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">Name (required)</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="email" className="form-control" id="email" name='email' placeholder="name@example.com" value={data.email} onChange={handleChange}></input>
@@ -55,7 +52,7 @@ const UserForm = ({ add, clients }) => {
                     </div>
                     <div className="form-floating mb-3">
                         <input type="phone" className="form-control" id="phone" name='phone' placeholder="920-222-2827" value={data.phone} onChange={handleChange}></input>
-                        <label htmlFor="phone">Phone - REQUIRED!</label>
+                        <label htmlFor="phone">Phone (required)</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" id="propName" name='propName' placeholder="ABC Property" value={data.propName} onChange={handleChange}></input>
