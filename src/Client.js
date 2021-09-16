@@ -25,8 +25,9 @@ const Client = ({ clients, removeClient }) => {
 
 
             <div className='row mt-5'>
-                <div className='col-lg-4'>
+                <div className='col-lg-5'>
                     <h2 className='display-6'>{client.user.name}</h2>
+                    <h3 className='display-6 fs-3'>{client.user.propName} - {client.user.propAddress}</h3>
                     <span className='fs-5 d-block text-muted'>{client.user.phone}</span>
                     <span className='fs-5 d-block text-muted'>{client.user.email}</span>
                     <span className='fs-5 d-block text-muted mt-lg-4'>Notes: {client.user.notes}</span>

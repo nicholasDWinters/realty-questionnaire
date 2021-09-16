@@ -5,9 +5,7 @@ const NotesForm = ({ addClient, user, answers, addUser, change }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(notes);
-        console.log(answers);
-        console.log(user);
+
         const client = {
             'user': user,
             'answers': answers,

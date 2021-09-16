@@ -8,6 +8,8 @@ const UserForm = ({ add, clients }) => {
         name: '',
         email: '',
         phone: '',
+        propName: '',
+        propAddress: '',
         notes: ''
     }
     const [data, setData] = useState(initial);
@@ -34,7 +36,8 @@ const UserForm = ({ add, clients }) => {
 
     useEffect(() => {
 
-    }, [clients])
+    }, [clients]);
+
     return (
         <div className='mt-3 row'>
             <div className='col-lg-6 order-3 order-lg-1 mt-4 mt-lg-0'>
@@ -48,11 +51,19 @@ const UserForm = ({ add, clients }) => {
                     </div>
                     <div className="form-floating mb-3">
                         <input type="email" className="form-control" id="email" name='email' placeholder="name@example.com" value={data.email} onChange={handleChange}></input>
-                        <label htmlFor="floatingInput">Email address</label>
+                        <label htmlFor="floatingInput">Email Address</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="phone" className="form-control" id="phone" name='phone' placeholder="920-222-2827" value={data.phone} onChange={handleChange}></input>
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone - REQUIRED!</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" id="propName" name='propName' placeholder="ABC Property" value={data.propName} onChange={handleChange}></input>
+                        <label htmlFor="propName">Property Name</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" id="propAddress" name='propAddress' placeholder="123 Fake St" value={data.propAddress} onChange={handleChange}></input>
+                        <label htmlFor="propAddress">Property Address</label>
                     </div>
                     <div className="form-floating mb-3">
                         <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" value={data.notes} onChange={handleChange}></textarea>

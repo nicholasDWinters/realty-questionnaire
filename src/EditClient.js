@@ -10,6 +10,8 @@ const EditClient = ({ clients, editClient }) => {
         name: client.user.name,
         email: client.user.email,
         phone: client.user.phone,
+        propName: client.user.propName,
+        propAddress: client.user.propAddress,
         notes: client.user.notes
     }
     const [data, setData] = useState(initial);
@@ -30,14 +32,15 @@ const EditClient = ({ clients, editClient }) => {
             'answers': client.answers,
             'qNotes': client.qNotes
         }
+
         editClient(client.user.phone, newClient);
-        // addClient(newClient);
 
         setData(initial);
 
         history.push(`/clients/${newClient.user.phone}`);
-        // history.push(`/`);
+
     }
+
     return (
         <div>
             <h1>Edit client</h1>
@@ -56,6 +59,17 @@ const EditClient = ({ clients, editClient }) => {
                             <input type="phone" className="form-control" id="phone" name='phone' placeholder="920-222-2827" value={data.phone} onChange={handleChange}></input>
                             <label htmlFor="phone">Phone</label>
                         </div>
+
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="propName" name='propName' placeholder="Abc property" value={data.propName} onChange={handleChange}></input>
+                            <label htmlFor="propName">Property Name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="propAddress" name='propAddress' placeholder="123 Fake St" value={data.propAddress} onChange={handleChange}></input>
+                            <label htmlFor="propAddress">Property Address</label>
+                        </div>
+
+
                         <div className="form-floating mb-3">
                             <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" value={data.notes} onChange={handleChange}></textarea>
                             <label htmlFor="notes">Notes</label>

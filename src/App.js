@@ -34,6 +34,8 @@ function App() {
 
   const addClient = (client) => {
     setClients([...clients, client]);
+
+
   }
 
   const editClient = (phone, client) => {
@@ -42,20 +44,37 @@ function App() {
 
     setClients([...newClients]);
 
+
+
   }
 
   const removeClient = (phone) => {
     let newClients = clients.filter(c => c.user.phone !== phone);
     setClients([...newClients]);
+
+
   }
 
   useEffect(() => {
+    let stored = localStorage.getItem('clients');
+    localStorage.setItem('savedClients', stored);
+    let savedClients = JSON.parse(stored);
+    setClients([...savedClients]);
+  }, []);
 
+  useEffect(() => {
+
+    localStorage.setItem('clients', JSON.stringify(clients));
+  }, [clients]);
+
+  useEffect(() => {
   }, [user, clients]);
 
+
+
   return (
-    <div className="App container mt-5 mb-5">
-      <h1 className='display-1'>Realty Questionnaire</h1>
+    <div className="App container mt-3 mb-3">
+      <h1 className='display-2'>Realty Questionnaire</h1>
       <Switch>
         <Route exact path='/questions'>{user.name ? <Question questArr={questArr} user={user} addUser={addUser} question={current} change={changeQuestion} addClient={addClient} /> : <Redirect to='/' />}</Route>
         <Route exact path='/'><UserForm add={addUser} clients={clients} /></Route>

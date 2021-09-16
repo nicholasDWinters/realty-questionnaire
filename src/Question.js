@@ -37,10 +37,12 @@ const Question = ({ question, change, user, addClient, addUser, questArr }) => {
     }
 
     return (
-        <div className='mt-3'>
+        <div className='mt-5'>
             <div className='row'>
                 <h3 className='display-6'>Questions for {user.name}</h3>
+                <p className='fs-3 display-6'>{user.propName} - {user.propAddress}</p>
                 <p>Notes: {user.notes}</p>
+
                 <div className='col-lg-6 order-2 order-lg-1'>
                     <History answers={answers} />
                 </div>
