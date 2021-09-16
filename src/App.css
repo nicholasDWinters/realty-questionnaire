@@ -7,6 +7,12 @@
 .Question {
   background-color: aliceblue;
   padding: 20px;
+  
   border-radius: 10px;
-  margin: 10px;
+  
+}
+
+.btn-light {
+  
+  background-color: aliceblue;
 }

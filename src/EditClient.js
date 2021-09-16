@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-const EditClient = ({ clients, addClient, editClient }) => {
+const EditClient = ({ clients, editClient }) => {
     const { phone } = useParams();
     const history = useHistory();
     let client = clients.filter(client => client.user.phone === phone);
@@ -43,7 +43,7 @@ const EditClient = ({ clients, addClient, editClient }) => {
             <h1>Edit client</h1>
             <form className='mb-4' onSubmit={submit}>
                 <div className='row'>
-                    <div className='col-lg-7'>
+                    <div className='col-lg-6'>
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control" id="name" name='name' placeholder="John Smith" value={data.name} onChange={handleChange}></input>
                             <label htmlFor="name">Name</label>
@@ -60,8 +60,9 @@ const EditClient = ({ clients, addClient, editClient }) => {
                             <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" value={data.notes} onChange={handleChange}></textarea>
                             <label htmlFor="notes">Notes</label>
                         </div>
-                        <div className='d-grid'>
+                        <div className='d-grid gap-3'>
                             <button className='btn btn-warning btn-lg'>Edit Client</button>
+                            <button className='btn btn-secondary btn-lg' onClick={() => history.push(`/clients/${client.user.phone}`)}>Back to Clients</button>
                         </div>
                     </div>
 
@@ -69,12 +70,7 @@ const EditClient = ({ clients, addClient, editClient }) => {
                 </div>
 
             </form>
-            <div className='row'>
-                <div className='col-lg-7'>
-                    <button className='btn btn-secondary btn-lg' onClick={() => history.push(`/clients/${client.user.phone}`)}>Back to Clients</button>
 
-                </div>
-            </div>
         </div>
     )
 }

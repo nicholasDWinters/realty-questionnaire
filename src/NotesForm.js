@@ -32,7 +32,7 @@ const NotesForm = ({ addClient, user, answers, addUser, change }) => {
 
 
                 <div className="form-floating mb-3">
-                    <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" rows='5' value={notes} onChange={handleChange}></textarea>
+                    <textarea className="form-control" placeholder="Leave a comment here" name='notes' id="notes" value={notes} onChange={handleChange}></textarea>
                     <label htmlFor="notes">Notes</label>
                 </div>
                 <div className='d-grid'>

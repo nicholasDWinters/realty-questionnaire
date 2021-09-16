@@ -44,18 +44,23 @@ function App() {
 
   }
 
+  const removeClient = (phone) => {
+    let newClients = clients.filter(c => c.user.phone !== phone);
+    setClients([...newClients]);
+  }
+
   useEffect(() => {
 
   }, [user, clients]);
 
   return (
-    <div className="App container mt-5">
+    <div className="App container mt-5 mb-5">
       <h1 className='display-1'>Realty Questionnaire</h1>
       <Switch>
         <Route exact path='/questions'>{user.name ? <Question questArr={questArr} user={user} addUser={addUser} question={current} change={changeQuestion} addClient={addClient} /> : <Redirect to='/' />}</Route>
         <Route exact path='/'><UserForm add={addUser} clients={clients} /></Route>
-        <Route exact path='/clients/:phone'><Client clients={clients} /></Route>
-        <Route exact path='/clients/:phone/edit'><EditClient clients={clients} addClient={addClient} editClient={editClient} /></Route>
+        <Route exact path='/clients/:phone'><Client removeClient={removeClient} clients={clients} /></Route>
+        <Route exact path='/clients/:phone/edit'><EditClient clients={clients} editClient={editClient} /></Route>
       </Switch>
 
 
